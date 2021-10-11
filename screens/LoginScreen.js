@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import {View, Text, Button, StyleSheet, Alert, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  Button,
+  StyleSheet,
+  Alert,
+  TouchableOpacity,
+} from 'react-native';
 import {
   KakaoOAuthToken,
   login,
@@ -15,10 +22,12 @@ const LoginScreen = ({navigation}) => {
 
   const kakaoLogin = async (): Promise<void> => {
     const token: KakaoOAuthToken = await login();
-    let access_token = {access_token: token.accessToken};
-    console.log(access_token);
     axios
-      .post('http://127.0.0.1:8000/auth/login/', access_token)
+      .get('http://127.0.0.1:8000/auth/kakao/login/', {
+        params: {
+          access_token: token.accessToken,
+        },
+      })
       .then(function (response) {
         console.log(JSON.stringify(response));
       })
