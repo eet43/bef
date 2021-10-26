@@ -4,9 +4,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import OnBoardingScreen from './screens/OnBoardingScreen';
 import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
-import icon from 'react-native-vector-icons/FontAwesome';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {View} from 'react-native';
+import MainNavi from './navigations/loginNavigation';
 
 const AppStack = createNativeStackNavigator();
 
@@ -17,9 +15,23 @@ const App = () => {
         <AppStack.Screen
           name={'OnBoardingScreen'}
           component={OnBoardingScreen}
-          options={{header: () => null}}
+          options={{headerShown: false}}
         />
-        <AppStack.Screen name={'Login'} component={LoginScreen} />
+        <AppStack.Screen
+          name={'Login'}
+          component={LoginScreen}
+          options={{headerShown: false}}
+        />
+        <AppStack.Screen
+          name={'Signup'}
+          component={SignupScreen}
+          options={{headerShown: false}}
+        />
+        <AppStack.Screen
+          name={'MainNavi'}
+          component={MainNavi}
+          options={{headerShown: false}}
+        />
       </AppStack.Navigator>
     </NavigationContainer>
   );
