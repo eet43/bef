@@ -1,8 +1,13 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import MainBoard from '../screens/MainBoard';
 import Profile from '../screens/Profile';
 import ChatList from '../screens/ChatList';
 import Post from '../screens/Post';
+import Chat from '../screens/Chat';
+import Board from '../screens/Board';
+import NewChat from "../screens/NewChat";
+import { useNavigationState } from '@react-navigation/native'
 import React from 'react';
 import {
   View,
@@ -12,8 +17,43 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
+const HomeStack = createNativeStackNavigator();
+
+const HomeBoardStack = ({navigation, route}) => {
+  // route.state && route.state.index > 0
+  //   ? navigation.setOptions({tabBarStyle: {display: 'none'}})
+  //   : navigation.setOptions({tabBarStyle: {display: 'flex'}});
+  return (
+    <HomeStack.Navigator>
+      <Stack.Screen name={'Home'} component={MainBoard} options={{title: '배달프렌즈'}}/>
+      <Stack.Screen name={'Board'} component={Board} options={{headerBackTitleVisible: false,
+          headerTitle: false,
+          headerTransparent: true,
+        }}
+      />
+      <Stack.Screen name={'NewChat'} component={NewChat} />
+    </HomeStack.Navigator>
+  );
+};
+
+const MessageStack = ({navigation}) => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name={'Message'} component={ChatList} />
+      <Stack.Screen
+        name={'Chat'}
+        component={Chat}
+        options={({route}) => ({
+          title: route.params.record.nickName,
+        })}
+      />
+    </Stack.Navigator>
+  );
+};
 
 const CustomTabBarButton = ({children, onPress}) => (
   <TouchableOpacity
@@ -35,8 +75,21 @@ const CustomTabBarButton = ({children, onPress}) => (
     </View>
   </TouchableOpacity>
 );
+const Tabs = ({navigation}) => {
+  const getTabBarVisibility = route => {
+    console.log(route);
+    const routeName = route.state
+      ? route.state.routes[route.state.index].name
+      : '';
+    console.log('route : ', routeName);
 
-const Tabs = () => {
+    if (routeName === 'NewChat') {
+      return 'none';
+    }
+
+    return 'flex';
+  };
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -54,8 +107,11 @@ const Tabs = () => {
       }}>
       <Tab.Screen
         name={'MainBoard'}
-        component={MainBoard}
-        options={{
+        component={HomeBoardStack}
+        options={(route) => ({
+          tabBarStyle: {display: getTabBarVisibility(route)},
+          headerShown: false,
+          title: '배달프렌즈',
           tabBarIcon: ({focused}) => (
             <View
               style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
@@ -72,12 +128,14 @@ const Tabs = () => {
                 style={{ color: focused ? '#FF8000' : '#748c94', fontSize: 12, }}>Home</Text>
             </View>
           ),
-        }}
+        })}
       />
       <Tab.Screen
         name={'ChatList'}
-        component={ChatList}
-        options={{
+        component={MessageStack}
+        options={(route)=> ({
+          headerShown: false,
+          tabBarStyle: {display: getTabBarVisibility(route)},
           tabBarIcon: ({focused}) => (
             <View
               style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
@@ -94,7 +152,7 @@ const Tabs = () => {
                 style={{ color: focused ? '#FF8000' : '#748c94', fontSize: 12, }}>Chat</Text>
             </View>
           ),
-        }}
+        })}
       />
       <Tab.Screen
         name={'Profile'}
@@ -122,6 +180,14 @@ const Tabs = () => {
         name={'Post'}
         component={Post}
         options={{
+          headerLeft: () => (
+            <MaterialCommunityIcons
+              name={'keyboard-backspace'}
+              size={25}
+              color={'#FF8000'}
+              onPress={() => {}}
+            />
+          ),
           tabBarIcon: ({focused}) => (
             <Image
               source={require('../assets/Post.png')}

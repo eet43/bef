@@ -48,21 +48,23 @@ const OnBoardingScreen = ({navigation}) => {
       pages={[
         {
           backgroundColor: '#a6e4d0',
-          image: <Image source={require('../assets/onboarding-img1.png')} />,
-          title: '첫번째 화면',
-          subtitle: '서비스에 대해 설명하시오',
+          image: <Image source={require('../assets/onboarding-img2.png')} />,
+          title: '메뉴를 선택하세요',
+          subtitle: '먹고 싶은 메뉴의 카테고리를 선택해보세요',
         },
         {
           backgroundColor: '#fdeb93',
-          image: <Image source={require('../assets/onboarding-img2.png')} />,
-          title: '두번째 화면',
-          subtitle: '서비스에 대해 설명하시오',
+          image: <Image source={require('../assets/onboarding-img1.png')} />,
+          title: '의견을 조율해보세요',
+          subtitle:
+            '마음에 드는 음식을 선택한 후 채팅을 통해 최소 가격, 접선 장소, 시간과 같은 의견을 조율해보세요',
         },
         {
           backgroundColor: '#e9bcbe',
           image: <Image source={require('../assets/onboarding-img3.png')} />,
-          title: '세번째 화면',
-          subtitle: '서비스에 대해 설명하시오',
+          title: '합리적인 가격에 음식을 받아보세요',
+          subtitle:
+            '정해진 시간에 장소에 간 후, 합리적인 가격으로 1인분을 받아보세요',
         },
       ]}
     />

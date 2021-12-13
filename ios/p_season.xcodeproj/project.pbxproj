@@ -83,6 +83,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		12C8EC9F411440BF8FB51F61 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			path = "";
+			sourceTree = "<group>";
+		};
 		13B07FAE1A68108700A75B9A /* p_season */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +130,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				B891917EF8D9C217EE2E7749 /* Pods */,
+				12C8EC9F411440BF8FB51F61 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";

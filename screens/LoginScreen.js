@@ -31,8 +31,21 @@ const LoginScreen = ({navigation}) => {
         if (response.status == 201) {
           ///데이터베이스에 있을 경우 ( 기존 회원 )
           console.log('11111');
+          AsyncStorage.setItem(
+            'User',
+            JSON.stringify({
+              id: response.data['id'],
+              email: response.data['email'],
+              nickname: response.data['nickname'],
+              image: response.data['image'],
+            }),
+            () => {
+              console.log('유저정보 저장 완료');
+              console.log(response);
+            },
+          );
           navigation.replace('MainNavi');
-        } else {
+        } else { ///데이터베이스에 없을 경우 ( 신규 회원 )
           AsyncStorage.setItem(
             'user_id',
             JSON.stringify(response.data['id']),
@@ -49,13 +62,10 @@ const LoginScreen = ({navigation}) => {
   };
   return (
     <View style={styles.container}>
-      <View style={{alignItems: 'center', flex: 2, justifyContent: 'center'}}>
-        <Image
-          source={require('../assets/rn-social-logo.png')}
-          style={{width: '100%', height: '70%', resizeMode: 'cover'}}
-        />
-        <Text style={styles.text}>서비스를 이용해보세요</Text>
-      </View>
+      <Image
+        source={require('../assets/loginLogo.png')}
+        style={{width: '100%', height: 700, resizeMode: 'contain'}}
+      />
       <View style={styles.content}>
         <TouchableOpacity onPress={() => kakaoLogin()} style={styles.area}>
           <Image
@@ -64,6 +74,9 @@ const LoginScreen = ({navigation}) => {
           />
         </TouchableOpacity>
       </View>
+      <Text style={{fontSize: 16, color: 'gray', textAlign: 'center', marginHorizontal: 48,}}>
+        서비스를 이용하시려면 카카오톡 로그인 버튼을 클릭해주세요.
+      </Text>
     </View>
   );
 };
@@ -73,13 +86,13 @@ export default LoginScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
+    backgroundColor: '#fff',
   },
   content: {
-    flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    paddingBottom: 30,
+    margin: 40,
+    marginTop: -180,
+    marginBottom: -60,
   },
   area: {
     borderRadius: 12,
@@ -92,9 +105,5 @@ const styles = StyleSheet.create({
     width: '100%',
     resizeMode: 'cover',
     borderRadius: 12,
-  },
-  text: {
-    fontSize: 28,
-    marginBottom: 15,
   },
 });

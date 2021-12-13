@@ -7,16 +7,21 @@ import {
   Alert,
   TouchableOpacity,
   Image,
-  TextInput,
+  TextInput, ImageBackground,
 } from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { SafeAreaProvider } from "react-native-safe-area-context/src/SafeAreaContext";
+import { Header, Icon } from "react-native-elements";
 
 const SignupScreen = ({navigation}) => {
-  const [imageUrl, setImageUrl] = useState('');
+  let defImage = {
+    uri: 'file:///Users/thebettertech/p_season/assets/default_profile.png',
+  };
+  const [imageUrl, setImageUrl] = useState(defImage);
   const [nickName, setNickName] = useState('');
-  const [id, setId] = useState('');
+  const [id, setId] = useState(0);
 
   const openImage = () => {
     const options = {
@@ -42,6 +47,7 @@ const SignupScreen = ({navigation}) => {
     });
   };
 
+  console.log(imageUrl);
   AsyncStorage.getItem('user_id', (error, result) => {
     setId(result);
     console.log(id);
@@ -63,7 +69,7 @@ const SignupScreen = ({navigation}) => {
               id: response.data['id'],
               email: response.data['email'],
               nickname: response.data['nickname'],
-              image: response.data['image'],
+              image: imageUrl,
             }),
             () => {
               console.log('유저정보 저장 완료');
@@ -79,15 +85,41 @@ const SignupScreen = ({navigation}) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Image source={imageUrl} style={styles.imageButton} />
-      <Button title={'프로필 설정'} onPress={() => openImage()}></Button>
-      <TextInput
-        style={styles.input}
-        onChangeText={text => setNickName(text)}
+    <SafeAreaProvider style={{backgroundColor: '#fff'}}>
+      <Header
+        backgroundColor={'#fff'}
+        centerComponent={{
+          text: '프로필 설정',
+          style: {color: 'black', fontSize: 20, fontWeight: 'bold'},
+        }}
+        rightComponent={
+          <View style={styles.header}>
+            <TouchableOpacity onPress={summit}>
+              <Text style={{fontSize: 20, fontWeight: 'bold'}}>완료</Text>
+            </TouchableOpacity>
+          </View>
+        }
       />
-      <Button title={'회원 가입하기'} onPress={() => summit()} />
-    </View>
+      <View style={{flex: 2, alignItems: 'center', justifyContent: 'center'}}>
+        <TouchableOpacity onPress={() => openImage()}>
+          <ImageBackground
+            source={imageUrl}
+            style={{width: 200, height: 200}}
+            imageStyle={{borderRadius: 100}}
+          />
+        </TouchableOpacity>
+      </View>
+      <View style={{flex: 3, alignItems: 'center'}}>
+        <Text style={{fontSize: 20, color: '#C9E265', fontWeight: 'bold', marginRight: 230}}>
+          닉네임
+        </Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={text => setNickName(text)}
+          autoCompleteType={false}
+        />
+      </View>
+    </SafeAreaProvider>
   );
 };
 export default SignupScreen;
@@ -96,24 +128,14 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
-    paddingTop: 50,
-  },
-  imageButton: {
-    width: 200,
-    height: 200,
-    borderRadius: 100,
-    borderWidth: 2,
-    borderColor: 'black',
   },
   input: {
-    width: 250,
-    height: 40,
-    marginTop: 30,
-    borderRadius: 10,
-    borderWidth: 2,
-    padding: 10,
-    textAlign: 'center',
-    textAlignVertical: 'top',
+    width: 280,
+    height: 60,
+    borderColor: '#C9E265',
+    borderBottomWidth: 3,
+    marginTop: -10,
+    paddingTop: 20,
+    fontSize: 17,
   },
 });
