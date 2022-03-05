@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -16,12 +16,15 @@ import { SafeAreaProvider } from "react-native-safe-area-context/src/SafeAreaCon
 import { Header, Icon } from "react-native-elements";
 
 const SignupScreen = ({navigation}) => {
+
   let defImage = {
     uri: 'file:///Users/thebettertech/p_season/assets/default_profile.png',
   };
   const [imageUrl, setImageUrl] = useState(defImage);
   const [nickName, setNickName] = useState('');
   const [id, setId] = useState(0);
+  const [location, setLocation] = useState();
+  
 
   const openImage = () => {
     const options = {
