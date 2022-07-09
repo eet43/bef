@@ -6,6 +6,7 @@ import OnBoardingScreen from './screens/OnBoardingScreen';
 import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
 import MainNavi from './navigations/loginNavigation';
+import LocationScreen from './screens/Location';
 
 const AppStack = createNativeStackNavigator();
 
@@ -26,6 +27,11 @@ const App = () => {
         <AppStack.Screen
           name={'Signup'}
           component={SignupScreen}
+          options={{headerShown: false}}
+        />
+        <AppStack.Screen
+          name={'Location_SignUp'}
+          component={LocationScreen}
           options={{headerShown: false}}
         />
         <AppStack.Screen

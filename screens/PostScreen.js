@@ -77,7 +77,7 @@ Number.prototype.zf = function (len) {
   return this.toString().zf(len);
 };
 
-const Post = ({navigation}) => {
+const PostScreen = ( {navigation}) => {
   const [id, setId] = useState(0);
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
@@ -119,7 +119,7 @@ const Post = ({navigation}) => {
 
   const postUser = () => {
     axios
-      .post('http://127.0.0.1:8000/board/new_post/', {
+      .post('https://delivery-friend.herokuapp.com/board/new_post/', {
         author: id,
         title: title,
         text: text,
@@ -207,7 +207,7 @@ const Post = ({navigation}) => {
   );
 };
 
-export default Post;
+export default PostScreen;
 
 const styles = StyleSheet.create({
   container: {

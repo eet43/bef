@@ -14,14 +14,14 @@ import {
 } from 'react-native-image-header-scroll-view';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import axios from 'axios';
-import Post from '../screens/Post';
+import PostScreen from './PostScreen';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import async from "async";
 
 const MIN_HEIGHT = Platform.OS === 'ios' ? 90 : 55;
 const MAX_HEIGHT = 350;
 
-const Board = ({route, navigation}) => {
+const BoardScreen = ( {route, navigation}) => {
   const itemData = route.params.itemData;
   const [label, setLabel] = useState('');
   const [nickname, setNickname] = useState('');
@@ -39,7 +39,7 @@ const Board = ({route, navigation}) => {
 
   const setChat = () => {
     axios
-      .post('http://127.0.0.1:8000/chat/room/room_name/', {
+      .post('https://delivery-friend.herokuapp.com/chat/room/room_name/', {
         room_name: 'asdf-1234', ///주소
       })
       .then(function (response) {
@@ -82,7 +82,7 @@ const Board = ({route, navigation}) => {
   //         })
   //         .then(function (response) {
   //           console.log(response);
-  //           navigation.replace('NewChat', {
+  //           navigation.replace('NewChatScreen', {
   //             address: `ws://127.0.0.1:8000/ws/chat/${label}/`,
   //             record: user,
   //           });
@@ -137,7 +137,7 @@ const Board = ({route, navigation}) => {
   );
 };
 
-export default Board;
+export default BoardScreen;
 
 const styles = StyleSheet.create({
   container: {

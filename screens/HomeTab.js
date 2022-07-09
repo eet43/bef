@@ -3,11 +3,11 @@ import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs
 import Kfood from './Kfood';
 import Jfood from './Jfood';
 import Cfood from './Cfood';
-import Board from './Board';
+import BoardScreen from './BoardScreen';
 
 const Top = createMaterialTopTabNavigator();
 
-const MainBoard = ({navigation}) => {
+const HomeTab = ( {navigation}) => {
   return (
     <Top.Navigator>
       <Top.Screen name={'Korean'} component={Kfood} options={{title: '한식'}} />
@@ -17,4 +17,4 @@ const MainBoard = ({navigation}) => {
   );
 };
 
-export default MainBoard;
+export default HomeTab;

@@ -21,7 +21,7 @@ import axios from 'axios';
 import { uuid } from 'uuidv4';
 
 
-const Chat = ({navigation, route}) => {
+const ChatScreen = ( {navigation, route}) => {
   const [messages, setMessages] = useState([]);
   const [senderId, setSenderId] = useState(route.params.record.sender_id);
   const [receiverId, setReceiverId] = useState(route.params.record.receiver_id);
@@ -141,4 +141,4 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
-export default Chat;
+export default ChatScreen;

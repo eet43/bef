@@ -20,7 +20,7 @@ const Cfood = ({navigation}) => {
   useEffect(() => {
     setIsLoding(true);
     axios
-      .get('http://127.0.0.1:8000/category/3', {
+      .get('https://delivery-friend.herokuapp.com/board/category/3', {
         header: {
           token: '1234',
         },

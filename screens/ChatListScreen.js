@@ -4,7 +4,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
-const ChatList = ({navigation}) => {
+const ChatListScreen = ( {navigation}) => {
   const [nickName, setNickName] = useState('');
   const [id, setId] = useState(0);
   const [Items, setItems] = useState([]);
@@ -107,4 +107,4 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
-export default ChatList;
+export default ChatListScreen;

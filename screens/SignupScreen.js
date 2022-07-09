@@ -24,7 +24,7 @@ const SignupScreen = ({navigation}) => {
   const [nickName, setNickName] = useState('');
   const [id, setId] = useState(0);
   const [location, setLocation] = useState();
-  
+
 
   const openImage = () => {
     const options = {
@@ -58,7 +58,7 @@ const SignupScreen = ({navigation}) => {
 
   const summit = () => {
     axios
-      .post('http://127.0.0.1:8000/signup/', {
+      .post('https://delivery-friend.herokuapp.com/user/signup/', {
         nickname: nickName,
         image: imageUrl,
         id: id,
@@ -79,7 +79,7 @@ const SignupScreen = ({navigation}) => {
               console.log(response);
             },
           );
-          navigation.replace('MainNavi');
+          navigation.replace('Location_SignUp');
         }
       })
       .catch(function (error) {

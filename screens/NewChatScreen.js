@@ -17,7 +17,7 @@ import {
 } from 'react-native';
 import axios from 'axios';
 
-const NewChat = ({route}) => {
+const NewChatScreen = ( {route}) => {
   const [messages, setMessages] = useState([]);
   const [senderId, setSenderId] = useState(route.params.record.sender_id);
   const [receiverId, setReceiverId] = useState(route.params.record.receiver_id);
@@ -99,4 +99,4 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
-export default NewChat;
+export default NewChatScreen;

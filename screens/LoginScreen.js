@@ -22,7 +22,7 @@ const LoginScreen = ({navigation}) => {
   const kakaoLogin = async (): Promise<void> => {
     const token: KakaoOAuthToken = await login();
     axios
-      .get('http://127.0.0.1:8000/auth/kakao/login/', {
+      .get('https://delivery-friend.herokuapp.com/user/auth/kakao/', {
         params: {
           access_token: token.accessToken,
         },

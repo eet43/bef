@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
-import {
-  StyleSheet, ImageBackground, SafeAreaView, View,
-} from "react-native";
+import React, {useEffect, useState} from 'react';
+import {StyleSheet, ImageBackground, SafeAreaView, View} from 'react-native';
 import {
   Avatar,
   Title,
@@ -11,8 +9,9 @@ import {
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Location from "./Location";
 
-const Profile = ({navigation}) => {
+const ProfileScreen = ( {navigation}) => {
   const [imageUrl, setImageUrl] = useState('');
   const [nickName, setNickName] = useState('');
   const [email, setEmail] = useState('');
@@ -43,16 +42,14 @@ const Profile = ({navigation}) => {
 
       <View style={styles.userInfoSection}>
         <View style={styles.row}>
-          <Icon name="map-marker-radius" color="#777777" size={20}/>
+          <Icon name="map-marker-radius" color="#777777" size={20} />
           <Text style={{color: '#777777', marginLeft: 20}}>
             조치원읍, 대한민국
           </Text>
         </View>
         <View style={styles.row}>
-          <Icon name="email" color="#777777" size={20}/>
-          <Text style={{color: '#777777', marginLeft: 20}}>
-            {`${email}`}
-          </Text>
+          <Icon name="email" color="#777777" size={20} />
+          <Text style={{color: '#777777', marginLeft: 20}}>{`${email}`}</Text>
         </View>
       </View>
 
@@ -75,6 +72,12 @@ const Profile = ({navigation}) => {
       </View>
 
       <View style={styles.menuWrapper}>
+        <TouchableRipple onPress={() => {navigation.replace('Location')}}>
+          <View style={styles.menuItem}>
+            <Icon name="map-marker" color="#FF8000" size={25} />
+            <Text style={styles.menuItemText}>동네설정</Text>
+          </View>
+        </TouchableRipple>
         <TouchableRipple onPress={() => {}}>
           <View style={styles.menuItem}>
             <Icon name="heart-outline" color="#FF8000" size={25} />
@@ -98,7 +101,7 @@ const Profile = ({navigation}) => {
   );
 };
 
-export default Profile;
+export default ProfileScreen;
 
 const styles = StyleSheet.create({
   container: {
