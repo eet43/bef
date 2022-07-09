@@ -18,6 +18,7 @@
 
 
 ## 화면 구성
+<img width="713" alt="content_Bf" src="https://user-images.githubusercontent.com/59008469/178099441-0f7045f6-948d-468b-a09b-7077c23e5ef5.png">
 
 ## 프로젝트 팀원
 김대희 – [github 프로필](https://github.com/eet43) – 1998opening@gmail.com <br>
